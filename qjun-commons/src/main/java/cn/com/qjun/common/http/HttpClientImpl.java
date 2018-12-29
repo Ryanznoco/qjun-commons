@@ -5,6 +5,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
  */
 @Slf4j
 public class HttpClientImpl implements HttpClient {
+    private final HttpClientConfig config;
     private final HttpHandler httpHandler;
 
     public HttpClientImpl() {
@@ -21,27 +23,29 @@ public class HttpClientImpl implements HttpClient {
     }
 
     public HttpClientImpl(HttpClientConfig config) {
+        this.config = config;
         this.httpHandler = new HttpHandler(config);
     }
 
     @Override
-    public Optional<String> getAsString(String uri) {
+    public Optional<String> getForString(String uri) {
         HttpGet httpGet = new HttpGet(uri);
         try {
             return Optional.ofNullable(httpHandler.doRequest(httpGet,
-                    (response) -> EntityUtils.toString(response.getEntity())));
+                    (response) -> EntityUtils.toString(response.getEntity(), config.getCharset())));
         } catch (IOException e) {
             return Optional.empty();
         }
     }
 
     @Override
-    public Optional<String> getAsString(String uri, Map<String, String> params) {
+    public Optional<String> getForString(String uri, Map<String, String> params) {
         return null;
     }
 
     @Override
     public void destroy() {
         httpHandler.shutdown();
+        log.info("-------HttpClient Shutdown-------");
     }
 }

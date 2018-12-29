@@ -9,6 +9,10 @@ import lombok.Data;
 @Data
 public class HttpClientConfig {
     /**
+     * 编码方式
+     */
+    private String charset = "UTF8";
+    /**
      * 连接保持时间，单位：秒
      * 默认每个连接最多保持60秒
      */

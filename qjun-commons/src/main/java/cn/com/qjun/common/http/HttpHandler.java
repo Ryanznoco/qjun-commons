@@ -105,6 +105,7 @@ public class HttpHandler {
         @Override
         public void run() {
             while (running) {
+                log.trace("-------HttpClient connection monitor thread run-------");
                 try {
                     Thread.sleep(config.getConnectionCheckPeriod() * 1000);
                     // 关闭过期连接
@@ -115,6 +116,7 @@ public class HttpHandler {
                     log.error(e.getMessage(), e);
                 }
             }
+            log.debug("-------HttpClient connection monitor thread shutdown-------");
         }
     }
 }

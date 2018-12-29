@@ -9,9 +9,9 @@ import java.util.Optional;
  */
 public interface HttpClient {
 
-    Optional<String> getAsString(String uri);
+    Optional<String> getForString(String uri);
 
-    Optional<String> getAsString(String uri, Map<String, String> params);
+    Optional<String> getForString(String uri, Map<String, String> params);
 
     void destroy();
 }
