@@ -47,4 +47,17 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>release</name>
+            <url>https://maven.qjun.com.cn:10444/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>snapshot</name>
+            <url>https://maven.qjun.com.cn:10444/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
