@@ -1,11 +1,13 @@
 package cn.com.qjun.common.http;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.Optional;
 
@@ -28,19 +30,29 @@ public class HttpClientImpl implements HttpClient {
     }
 
     @Override
-    public Optional<String> getForString(String uri) {
+    public Optional<String> getForString(@NonNull String uri) {
         HttpGet httpGet = new HttpGet(uri);
         try {
             return Optional.ofNullable(httpHandler.doRequest(httpGet,
-                    (response) -> EntityUtils.toString(response.getEntity(), config.getCharset())));
+                    response -> EntityUtils.toString(response.getEntity(), config.getCharset())));
         } catch (IOException e) {
-            return Optional.empty();
+            log.error(e.getMessage(), e);
+            throw new HttpClientException(e.getMessage(), e);
         }
     }
 
     @Override
-    public Optional<String> getForString(String uri, Map<String, String> params) {
-        return null;
+    public Optional<String> getForString(@NonNull String uri, @NonNull Map<String, String> params) {
+        try {
+            URIBuilder builder = new URIBuilder(uri);
+            params.forEach(builder::addParameter);
+            HttpGet httpGet = new HttpGet(builder.build());
+            return Optional.ofNullable(httpHandler.doRequest(httpGet,
+                    response -> EntityUtils.toString(response.getEntity(), config.getCharset())));
+        } catch (URISyntaxException | IOException e) {
+            log.error(e.getMessage(), e);
+            throw new HttpClientException(e.getMessage(), e);
+        }
     }
 
     @Override
