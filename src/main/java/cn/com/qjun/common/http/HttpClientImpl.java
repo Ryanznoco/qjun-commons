@@ -56,6 +56,22 @@ public class HttpClientImpl implements HttpClient {
     }
 
     @Override
+    public <T> Optional<T> getForObject(@NonNull String uri, @NonNull Class<T> clazz) {
+        Optional<String> responseOpt = getForString(uri);
+        if (responseOpt.isPresent()) {
+            return responseOpt.map(response -> {
+                try {
+                    return config.getObjectMapper().readValue(response, clazz);
+                } catch (IOException e) {
+                    log.error(e.getMessage(), e);
+                    throw new HttpClientException(e.getMessage(), e);
+                }
+            });
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public void destroy() {
         httpHandler.shutdown();
         log.info("-------HttpClient Shutdown-------");

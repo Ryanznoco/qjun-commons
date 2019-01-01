@@ -1,5 +1,6 @@
 package cn.com.qjun.common.http;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
 /**
@@ -8,6 +9,10 @@ import lombok.Data;
  */
 @Data
 public class HttpClientConfig {
+    /**
+     * Json ObjectMapper
+     */
+    private ObjectMapper objectMapper = new ObjectMapper();
     /**
      * 编码方式
      */
@@ -35,5 +40,4 @@ public class HttpClientConfig {
      * 默认空闲超过30秒则关闭连接
      */
     private int connectionMaxIdleTime = 30;
-
 }
