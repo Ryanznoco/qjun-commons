@@ -11,7 +11,6 @@ import java.util.Map;
 
 /**
  * @author RenQiang
- * @date 2018/12/29
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class URIUtils {
@@ -21,8 +20,8 @@ public class URIUtils {
      *
      * @param uri    URI
      * @param params 查询参数，key-参数名，value-参数值
-     * @return
-     * @throws URISyntaxException
+     * @return 带查询参数的URI
+     * @throws URISyntaxException Checked exception thrown to indicate that a string could not be parsed as a URI reference.
      */
     public static URI buildUriWithParams(@NonNull String uri, @NonNull Map<String, String> params) throws URISyntaxException {
         URIBuilder builder = new URIBuilder(uri);

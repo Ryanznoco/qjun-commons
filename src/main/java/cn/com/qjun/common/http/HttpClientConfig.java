@@ -5,7 +5,6 @@ import lombok.Data;
 
 /**
  * @author RenQiang
- * @date 2018/12/29
  */
 @Data
 public class HttpClientConfig {

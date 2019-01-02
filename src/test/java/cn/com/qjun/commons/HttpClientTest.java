@@ -16,7 +16,6 @@ import java.util.Optional;
 
 /**
  * @author RenQiang
- * @date 2018/12/29
  */
 public class HttpClientTest {
     private static final String BASE_URL = "http://prod.qjun.com.cn:7780";

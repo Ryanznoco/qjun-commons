@@ -7,7 +7,6 @@ import lombok.Data;
  * Post请求体
  *
  * @author RenQiang
- * @date 2018/12/29
  */
 @Data
 @Builder

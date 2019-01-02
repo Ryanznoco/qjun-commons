@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
  * Http帮助类，为高并发做了优化，重用连接
  *
  * @author RenQiang
- * @date 2018/12/29
  */
 @Slf4j
 public class HttpHandler {

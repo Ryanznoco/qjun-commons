@@ -8,7 +8,6 @@ import java.util.Map;
  * httpbin响应数据
  *
  * @author RenQiang
- * @date 2018/12/29
  */
 @Data
 public class ResponseData {

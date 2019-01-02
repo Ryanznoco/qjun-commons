@@ -27,7 +27,6 @@ import java.util.function.Function;
 
 /**
  * @author RenQiang
- * @date 2018/12/29
  */
 @Slf4j
 public class HttpClientImpl implements HttpClient {

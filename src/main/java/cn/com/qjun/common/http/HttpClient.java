@@ -8,7 +8,6 @@ import java.util.Optional;
 
 /**
  * @author RenQiang
- * @date 2018/12/29
  */
 public interface HttpClient {
 
@@ -33,7 +32,7 @@ public interface HttpClient {
      * 发送Get请求，返回字符串响应结果
      *
      * @param httpGet 自定义HttpGet对象
-     * @return
+     * @return 响应结果字符串
      */
     Optional<String> getForString(HttpGet httpGet);
 
@@ -43,7 +42,7 @@ public interface HttpClient {
      * @param uri   请求地址
      * @param clazz 返回对象Class
      * @param <T>   封装对象类型
-     * @return
+     * @return 响应体封装的Java对象
      */
     <T> Optional<T> getForObject(String uri, Class<T> clazz);
 
@@ -54,7 +53,7 @@ public interface HttpClient {
      * @param params 查询参数，key-参数名，value-参数值
      * @param clazz  返回对象Class
      * @param <T>    封装对象类型
-     * @return
+     * @return 响应体封装的Java对象
      */
     <T> Optional<T> getForObject(String uri, Map<String, String> params, Class<T> clazz);
 
@@ -64,7 +63,7 @@ public interface HttpClient {
      * @param httpGet 自定义HttpGet对象
      * @param clazz   返回对象Class
      * @param <T>     封装对象类型
-     * @return
+     * @return 响应体封装的Java对象
      */
     <T> Optional<T> getForObject(HttpGet httpGet, Class<T> clazz);
 
@@ -89,16 +88,16 @@ public interface HttpClient {
      * 发送Post请求，返回字符串响应结果
      *
      * @param httpPost 自定义HttpPost对象
-     * @return
+     * @return 响应结果字符串
      */
     Optional<String> postForString(HttpPost httpPost);
 
     /**
      * 发送Post请求，返回字符串响应结果
      *
-     * @param uri       请求地址
-     * @param body      请求体，转换成Json提交
-     * @return
+     * @param uri  请求地址
+     * @param body 请求体，转换成Json提交
+     * @return 响应结果字符串
      */
     Optional<String> postForString(String uri, Object body);
 
@@ -108,7 +107,7 @@ public interface HttpClient {
      * @param uri   请求地址
      * @param clazz 返回对象Class
      * @param <T>   封装对象类型
-     * @return
+     * @return 响应体封装的Java对象
      */
     <T> Optional<T> postForObject(String uri, Class<T> clazz);
 
@@ -119,7 +118,7 @@ public interface HttpClient {
      * @param params Post参数，key-参数名，value-参数值
      * @param clazz  返回对象Class
      * @param <T>    封装对象类型
-     * @return
+     * @return 响应体封装的Java对象
      */
     <T> Optional<T> postForObject(String uri, Map<String, String> params, Class<T> clazz);
 
@@ -129,17 +128,18 @@ public interface HttpClient {
      * @param httpPost 自定义HttpPost对象
      * @param clazz    返回对象Class
      * @param <T>      封装对象类型
-     * @return
+     * @return 响应体封装的Java对象
      */
     <T> Optional<T> postForObject(HttpPost httpPost, Class<T> clazz);
 
     /**
      * 发送Post请求，返回字符串响应结果
      *
-     * @param uri         请求地址
-     * @param body        请求体，转换成Json提交
+     * @param uri   请求地址
+     * @param body  请求体，转换成Json提交
      * @param clazz 返回对象Class
-     * @return
+     * @param <T>   封装对象类型
+     * @return 响应体封装的Java对象
      */
     <T> Optional<T> postForObject(String uri, Object body, Class<T> clazz);
 
