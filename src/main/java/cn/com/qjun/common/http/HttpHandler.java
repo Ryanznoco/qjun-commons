@@ -50,6 +50,7 @@ public class HttpHandler {
          * 活动连接监控线程，自动关闭无效连接
          */
         Thread monitorThread = new Thread(new IdleConnectionMonitor());
+        monitorThread.setName("QJ-HTTP-MT");
         monitorThread.setDaemon(true);
         monitorThread.start();
     }
@@ -104,8 +105,8 @@ public class HttpHandler {
 
         @Override
         public void run() {
+            log.debug("-------HttpClient connection monitor thread start-------");
             while (running) {
-                log.trace("-------HttpClient connection monitor thread run-------");
                 try {
                     Thread.sleep(config.getConnectionCheckPeriod() * 1000);
                     // 关闭过期连接
