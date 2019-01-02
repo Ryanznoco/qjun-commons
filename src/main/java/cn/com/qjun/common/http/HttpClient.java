@@ -1,6 +1,7 @@
 package cn.com.qjun.common.http;
 
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 
 import java.util.Map;
 import java.util.Optional;
@@ -66,6 +67,86 @@ public interface HttpClient {
      * @return
      */
     <T> Optional<T> getForObject(HttpGet httpGet, Class<T> clazz);
+
+    /**
+     * 发送Post请求，返回字符串响应结果
+     *
+     * @param uri 请求地址
+     * @return 响应结果字符串
+     */
+    Optional<String> postForString(String uri);
+
+    /**
+     * 发送Post请求，返回字符串响应结果
+     *
+     * @param uri    请求地址
+     * @param params Post参数，key-参数名，value-参数值
+     * @return 响应结果字符串
+     */
+    Optional<String> postForString(String uri, Map<String, String> params);
+
+    /**
+     * 发送Post请求，返回字符串响应结果
+     *
+     * @param httpPost 自定义HttpPost对象
+     * @return
+     */
+    Optional<String> postForString(HttpPost httpPost);
+
+    /**
+     * 发送Post请求，返回字符串响应结果
+     *
+     * @param uri       请求地址
+     * @param body      请求体，转换成Json提交
+     * @param bodyClass
+     * @param <T>
+     * @return
+     */
+    <T> Optional<String> postForString(String uri, T body, Class<T> bodyClass);
+
+    /**
+     * 发送Post请求，将响应内容封装为指定对象
+     *
+     * @param uri   请求地址
+     * @param clazz 返回对象Class
+     * @param <T>   封装对象类型
+     * @return
+     */
+    <T> Optional<T> postForObject(String uri, Class<T> clazz);
+
+    /**
+     * 发送Post请求，将响应内容封装为指定对象
+     *
+     * @param uri    请求地址
+     * @param params Post参数，key-参数名，value-参数值
+     * @param clazz  返回对象Class
+     * @param <T>    封装对象类型
+     * @return
+     */
+    <T> Optional<T> postForObject(String uri, Map<String, String> params, Class<T> clazz);
+
+    /**
+     * 发送Post请求，将响应内容封装为指定对象
+     *
+     * @param httpPost 自定义HttpPost对象
+     * @param clazz    返回对象Class
+     * @param <T>      封装对象类型
+     * @return
+     */
+    <T> Optional<T> postForObject(HttpPost httpPost, Class<T> clazz);
+
+    /**
+     * 发送Post请求，返回字符串响应结果
+     *
+     * @param uri         请求地址
+     * @param body        请求体，转换成Json提交
+     * @param bodyClass   请求体Class
+     * @param resultClass 返回对象Class
+     * @param <BT>
+     * @param <RT>
+     * @return
+     */
+    <BT, RT> Optional<RT> postForString(String uri, BT body, Class<BT> bodyClass, Class<RT> resultClass);
 
     /**
      * 释放资源，应用关闭时调用
