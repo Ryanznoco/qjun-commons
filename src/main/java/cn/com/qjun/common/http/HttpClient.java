@@ -98,11 +98,9 @@ public interface HttpClient {
      *
      * @param uri       请求地址
      * @param body      请求体，转换成Json提交
-     * @param bodyClass
-     * @param <T>
      * @return
      */
-    <T> Optional<String> postForString(String uri, T body, Class<T> bodyClass);
+    Optional<String> postForString(String uri, Object body);
 
     /**
      * 发送Post请求，将响应内容封装为指定对象
@@ -140,13 +138,10 @@ public interface HttpClient {
      *
      * @param uri         请求地址
      * @param body        请求体，转换成Json提交
-     * @param bodyClass   请求体Class
-     * @param resultClass 返回对象Class
-     * @param <BT>
-     * @param <RT>
+     * @param clazz 返回对象Class
      * @return
      */
-    <BT, RT> Optional<RT> postForString(String uri, BT body, Class<BT> bodyClass, Class<RT> resultClass);
+    <T> Optional<T> postForObject(String uri, Object body, Class<T> clazz);
 
     /**
      * 释放资源，应用关闭时调用
