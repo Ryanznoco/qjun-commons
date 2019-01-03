@@ -2,6 +2,7 @@ package cn.com.qjun.commons;
 
 import cn.com.qjun.common.http.HttpClient;
 import cn.com.qjun.common.http.HttpClientImpl;
+import cn.com.qjun.commons.domain.LoginForm;
 import cn.com.qjun.commons.domain.RequestData;
 import cn.com.qjun.commons.domain.ResponseData;
 import org.apache.http.client.methods.HttpGet;
@@ -20,6 +21,17 @@ import java.util.Optional;
 public class HttpClientTest {
     private static final String BASE_URL = "http://prod.qjun.com.cn:7780";
     private HttpClient httpClient = new HttpClientImpl();
+
+    @Test
+    public void testUTF8() {
+        String uri = "http://localhost:8082/auth/login";
+        LoginForm loginForm = new LoginForm();
+        loginForm.setUsername("中文乱码");
+        loginForm.setPassword("123456abcdef.");
+        loginForm.setVerifyCode("123456");
+        Optional<String> responseOpt = httpClient.postForString(uri, loginForm);
+        Assert.assertTrue(responseOpt.isPresent());
+    }
 
     @Test
     public void testGetForString() {

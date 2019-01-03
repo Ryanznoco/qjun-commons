@@ -174,10 +174,6 @@ public class HttpClientImpl implements HttpClient {
         log.info("-------HttpClient Shutdown-------");
     }
 
-    private String buildStatusErrorMsg(int statusCode) {
-        return String.format("Response status code is not ok %d", statusCode);
-    }
-
     class StringResponseHandler implements ResponseHandler<String> {
 
         @Override
@@ -186,7 +182,12 @@ public class HttpClientImpl implements HttpClient {
             if (statusCode == Consts.STATUS_CODE_OK) {
                 return EntityUtils.toString(httpResponse.getEntity(), config.getCharset());
             }
-            throw new HttpClientException(buildStatusErrorMsg(statusCode));
+            String message = String.format("Response status code is not ok. %d %s", statusCode, httpResponse.getStatusLine().getReasonPhrase());
+            String entity = EntityUtils.toString(httpResponse.getEntity(), config.getCharset());
+            if (entity != null && entity.length() > 0) {
+                message += "\n" + entity;
+            }
+            throw new HttpClientException(message);
         }
     }
 
