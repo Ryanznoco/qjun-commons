@@ -2,12 +2,14 @@ package cn.com.qjun.common.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author RenQiang
  */
 @Data
-public class HttpClientConfig {
+@ConfigurationProperties(prefix = Consts.PROPERTIES_PREFIX)
+public class HttpClientProperties {
     /**
      * Json ObjectMapper
      */

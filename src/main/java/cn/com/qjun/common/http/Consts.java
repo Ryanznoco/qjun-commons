@@ -5,6 +5,7 @@ package cn.com.qjun.common.http;
  *
  * @author RenQiang
  */
-public class Consts {
-    public static final int STATUS_CODE_OK = 200;
+class Consts {
+    static final int STATUS_CODE_OK = 200;
+    static final String PROPERTIES_PREFIX = "qjun.commons.httpclient";
 }

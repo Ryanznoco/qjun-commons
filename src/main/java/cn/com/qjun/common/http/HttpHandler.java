@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class HttpHandler {
-    private final HttpClientConfig config;
+    private final HttpClientProperties config;
     private volatile boolean running;
     /**
      * 单例Http客户端
@@ -33,7 +33,7 @@ public class HttpHandler {
      */
     private final PoolingHttpClientConnectionManager connectionManager;
 
-    public HttpHandler(HttpClientConfig config) {
+    public HttpHandler(HttpClientProperties config) {
         this.config = config;
         this.running = true;
         this.connectionManager = initConnectionManager(config);
@@ -71,7 +71,7 @@ public class HttpHandler {
         }
     }
 
-    private ConnectionKeepAliveStrategy initKeepAliveStrategy(HttpClientConfig config) {
+    private ConnectionKeepAliveStrategy initKeepAliveStrategy(HttpClientProperties config) {
         return (httpResponse, httpContext) -> {
             HeaderElementIterator it = new BasicHeaderElementIterator(
                     httpResponse.headerIterator(HTTP.CONN_KEEP_ALIVE));
@@ -90,7 +90,7 @@ public class HttpHandler {
         };
     }
 
-    private PoolingHttpClientConnectionManager initConnectionManager(HttpClientConfig config) {
+    private PoolingHttpClientConnectionManager initConnectionManager(HttpClientProperties config) {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(config.getMaxTotalConnection());
         connectionManager.setDefaultMaxPerRoute(config.getMaxConnectionPerRoute());

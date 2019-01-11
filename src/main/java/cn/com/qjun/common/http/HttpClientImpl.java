@@ -30,14 +30,14 @@ import java.util.function.Function;
  */
 @Slf4j
 public class HttpClientImpl implements HttpClient {
-    private final HttpClientConfig config;
+    private final HttpClientProperties config;
     private final HttpHandler httpHandler;
 
     public HttpClientImpl() {
-        this(new HttpClientConfig());
+        this(new HttpClientProperties());
     }
 
-    public HttpClientImpl(HttpClientConfig config) {
+    public HttpClientImpl(HttpClientProperties config) {
         this.config = config;
         this.httpHandler = new HttpHandler(config);
     }
